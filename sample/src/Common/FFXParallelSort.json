@@ -1,0 +1,20 @@
+{
+  "globals": {
+    "CpuValidationLayerEnabled": true,
+    "GpuValidationLayerEnabled": false,
+    "fullScreen": false,
+    "width": 1920,
+    "height": 1080,
+    "activeScene": 0,
+    "benchmark": false,
+    "stablePowerState": false
+  },
+  "BenchmarkSettings": {
+    "timeStep": 1,
+    "timeStart": 0,
+    "timeEnd": 0,
+    "exitWhenTimeEnds": true,
+    "resultsFilename": "FFXParallelSort.csv",
+    "warmUpFrames": 500
+  }
+}
