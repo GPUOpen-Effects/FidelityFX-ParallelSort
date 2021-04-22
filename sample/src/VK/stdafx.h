@@ -31,7 +31,7 @@
 #include <vector>
 #include <fstream>
 
-#include "../../libs/d3d12x/d3dx12.h"
+#include "vulkan/vulkan.h"
 
 // we are using DirectXMath
 #include <DirectXMath.h>
@@ -40,22 +40,18 @@ using namespace DirectX;
 // TODO: reference additional headers your program requires here
 #include "Base/Imgui.h"
 #include "Base/ImguiHelper.h"
-#include "Base/Fence.h"
-#include "Base/FrameworkWindows.h"
 #include "Base/Helper.h"
 #include "Base/Device.h"
+#include "Base/FrameworkWindows.h"
 #include "Base/Texture.h"
 #include "Base/SwapChain.h"
 #include "Base/UploadHeap.h"
-#include "Base/UserMarkers.h"
 #include "Base/GPUTimestamps.h"
 #include "Base/CommandListRing.h"
 #include "Base/StaticBufferPool.h"
 #include "Base/DynamicBufferRing.h"
 #include "Base/ResourceViewHeaps.h"
-#include "Base/SaveTexture.h"
 #include "Base/ShaderCompilerHelper.h"
-#include "Base/StaticConstantBufferPool.h"
 
 #include "GLTF/GltfPbrPass.h"
 #include "GLTF/GltfBBoxPass.h"
@@ -76,12 +72,10 @@ using namespace DirectX;
 #include "PostProc/ToneMappingCS.h"
 #include "PostProc/ColorConversionPS.h"
 #include "PostProc/DownSamplePS.h"
-#include "PostProc/ShadowResolvePass.h"
 
 #include "ParallelSort.h"
-#include "UI.h"
 
 #include "Widgets/wireframe.h"
 
 
-using namespace CAULDRON_DX12;
+using namespace CAULDRON_VK;

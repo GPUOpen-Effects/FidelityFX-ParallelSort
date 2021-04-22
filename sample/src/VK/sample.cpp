@@ -82,7 +82,7 @@ void Sample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHe
     if (!charString.compare(""))
         return;     // No parameters
 
-    // Need to first convert the char string to a wide character set
+    // Need to first convert the char string to a wide character set 
     std::wstring wideString;
     wideString.assign(charString.begin(), charString.end());
 
@@ -282,7 +282,8 @@ void Sample::OnRender()
     {
         // Benchmarking takes control of the time, and exits the app when the animation is done
         std::vector<TimeStamp> timeStamps = m_pRenderer->GetTimingValues();
-        m_time = BenchmarkLoop(timeStamps, nullptr, m_pRenderer->GetScreenshotFileName());
+        std::string Filename;
+        m_time = BenchmarkLoop(timeStamps, nullptr, Filename);
     }
     else
     {
@@ -309,7 +310,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     LPSTR lpCmdLine,
     int nCmdShow)
 {
-    LPCSTR Name = "FidelityFX Parallel Sort DX12 v1.1";
+    LPCSTR Name = "FidelityFX Parallel Sort VK v1.1";
 
     // create new DX sample
     return RunFramework(hInstance, lpCmdLine, nCmdShow, new Sample(Name));

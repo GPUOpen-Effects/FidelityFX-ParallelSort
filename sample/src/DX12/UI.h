@@ -1,5 +1,5 @@
-// stdafx.cpp
-//
+// AMD SampleDX12 sample code
+// 
 // Copyright(c) 2021 Advanced Micro Devices, Inc.All rights reserved.
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
@@ -17,7 +17,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "stdafx.h"
+#pragma once
 
-// TODO: reference any additional headers you need in STDAFX.H
-// and not in this file
+#include "PostProc/MagnifierPS.h"
+#include <string>
+
+struct UIState
+{
+    //
+    // WINDOW MANAGEMENT
+    //
+    bool bShowControlsWindow;
+    bool bShowProfilerWindow;
+
+    //
+    // PROFILER CONTROLS
+    //
+    bool  bShowMilliseconds;
+
+    // -----------------------------------------------
+
+    void Initialize();
+};

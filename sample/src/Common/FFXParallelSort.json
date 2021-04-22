@@ -1,13 +1,15 @@
 {
   "globals": {
-    "CpuValidationLayerEnabled": true,
+    "CpuValidationLayerEnabled": false,
     "GpuValidationLayerEnabled": false,
-    "fullScreen": false,
+    "presentationMode": 0,
     "width": 1920,
     "height": 1080,
     "activeScene": 0,
     "benchmark": false,
-    "stablePowerState": false
+    "vsync": false,
+    "stablePowerState": false,
+    "fontsize":  13
   },
   "BenchmarkSettings": {
     "timeStep": 1,

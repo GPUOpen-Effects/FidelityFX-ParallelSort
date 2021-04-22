@@ -1,5 +1,5 @@
-// stdafx.cpp
-//
+// sample.h
+// 
 // Copyright(c) 2021 Advanced Micro Devices, Inc.All rights reserved.
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
@@ -17,7 +17,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "stdafx.h"
+#pragma once
 
-// TODO: reference any additional headers you need in STDAFX.H
-// and not in this file
+#include "base/FrameworkWindows.h"
+#include "Renderer.h"
+#include "UI.h"
+
+// This class encapsulates the 'application' and is responsible for handling window events and scene updates (simulation)
+// Rendering and rendering resource management is done by the Renderer class
+
+class Sample : public FrameworkWindows
+{
+public:
+    Sample(LPCSTR name) : FrameworkWindows(name) { m_time = 0.f; }
+    void OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHeight) override;
+    void OnCreate() override;
+    void OnDestroy() override;
+    void OnRender() override;
+    bool OnEvent(MSG msg) override;
+    void OnResize() override;
+    void OnUpdateDisplay() override;
+
+    void BuildUI();
+    void OnUpdate();
+    void HandleInput(const ImGuiIO& io);
+
+private:
+    // Benchmarking support
+    bool        m_bIsBenchmarking;
+    float       m_time;
+
+    Renderer* m_pRenderer = NULL;
+    UIState     m_UIState;
+    float       m_fontSize;
+
+    // json config file
+    json        m_jsonConfigFile;
+};
