@@ -248,8 +248,10 @@
 	void FFX_ParallelSort_ScanPrefix(uint numValuesToScan, uint localID, uint groupID, uint BinOffset, uint BaseIndex, bool AddPartialSums,
 									 FFX_ParallelSortCB CBuffer, RWStructuredBuffer<uint> ScanSrc, RWStructuredBuffer<uint> ScanDst, RWStructuredBuffer<uint> ScanScratch)
 	{
+		uint i;
+
 		// Perform coalesced loads into LDS
-		for (uint i = 0; i < FFX_PARALLELSORT_ELEMENTS_PER_THREAD; i++)
+		for (i = 0; i < FFX_PARALLELSORT_ELEMENTS_PER_THREAD; i++)
 		{
 			uint DataIndex = BaseIndex + (i * FFX_PARALLELSORT_THREADGROUP_SIZE) + localID;
 
@@ -263,7 +265,7 @@
 
 		uint threadgroupSum = 0;
 		// Calculate the local scan-prefix for current thread
-		for (uint i = 0; i < FFX_PARALLELSORT_ELEMENTS_PER_THREAD; i++)
+		for (i = 0; i < FFX_PARALLELSORT_ELEMENTS_PER_THREAD; i++)
 		{
 			uint tmp = gs_FFX_PARALLELSORT_LDS[i][localID];
 			gs_FFX_PARALLELSORT_LDS[i][localID] = threadgroupSum;
@@ -283,14 +285,14 @@
 		}
 
 		// Add the block scanned-prefixes back in
-		for (uint i = 0; i < FFX_PARALLELSORT_ELEMENTS_PER_THREAD; i++)
+		for (i = 0; i < FFX_PARALLELSORT_ELEMENTS_PER_THREAD; i++)
 			gs_FFX_PARALLELSORT_LDS[i][localID] += threadgroupSum;
 
 		// Wait for everyone to catch up
 		GroupMemoryBarrierWithGroupSync();
 
 		// Perform coalesced writes to scan dst
-		for (uint i = 0; i < FFX_PARALLELSORT_ELEMENTS_PER_THREAD; i++)
+		for (i = 0; i < FFX_PARALLELSORT_ELEMENTS_PER_THREAD; i++)
 		{
 			uint DataIndex = BaseIndex + (i * FFX_PARALLELSORT_THREADGROUP_SIZE) + localID;
 
@@ -378,7 +380,7 @@
 					uint bitKey = (keyIndex >> bitShift) & 0x3;
 
 					// Create a packed histogram 
-					uint packedHistogram = 1 << (bitKey * 8);
+					uint packedHistogram = 1U << (bitKey * 8);
 
 					// Sum up all the packed keys (generates counted offsets up to current thread group)
 					uint localSum = FFX_ParallelSort_BlockScanPrefix(packedHistogram, localID);
